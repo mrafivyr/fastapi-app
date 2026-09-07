@@ -1,0 +1,36 @@
+[project]
+name = "fastapi-app"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">3.12"
+dependencies = [
+    "aiosqlite>=0.22.1",
+    "asyncpg>=0.31.0",
+    "fastapi[standard]>=0.141.1",
+    "httpx>=0.28.1",
+    "loguru>=0.7.3",
+    "redis>=8.1.0",
+    "scalar-fastapi>=1.9.0",
+    "sqlalchemy>=2.0.52",
+]
+
+[tool.uv.workspace]
+members = [
+    "python3.12",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers --strict-config"
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+# The app calls logging.basicConfig(level=0, force=True), which otherwise makes
+# pytest capture every aiosqlite/httpcore DEBUG line.
+log_level = "WARNING"

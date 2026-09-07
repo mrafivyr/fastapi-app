@@ -1,0 +1,36 @@
+# ======================================================
+# Virtual environments / caches  (70M + 65M of build context)
+# ======================================================
+.venv
+venv
+__pycache__/
+*.py[cod]
+.mypy_cache
+.ruff_cache
+.pytest_cache
+
+# ======================================================
+# Secrets — app/config.py reads `.env` from the CWD, so it
+# must never land in an image. Pass config as -e / env_file.
+# ======================================================
+.env
+.env.*
+
+# ======================================================
+# Local state
+# ======================================================
+*.db
+app.log
+*.log
+
+# ======================================================
+# VCS / editors / docs
+# ======================================================
+.git
+.gitignore
+.idea
+.vscode
+Dockerfile
+.dockerignore
+README.md
+tests.md
