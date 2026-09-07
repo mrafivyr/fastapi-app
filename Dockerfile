@@ -20,7 +20,7 @@ ARG UV_VERSION=0.11.15
 # ======================================================
 # BASE — shared by the builder and the runtime
 # ======================================================
-
+FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv
 FROM python:${PYTHON_VERSION}-slim AS base
 
 ENV PYTHONUNBUFFERED=1 \
@@ -40,7 +40,7 @@ WORKDIR /app
 
 FROM base AS deps
 
-COPY --from=ghcr.io/astral-sh/uv:${UV_VERSION} /uv /uvx /usr/local/bin/
+COPY --from=uv /uv /uvx /usr/local/bin/
 
 ENV UV_COMPILE_BYTECODE=1 \
     UV_LINK_MODE=copy \
